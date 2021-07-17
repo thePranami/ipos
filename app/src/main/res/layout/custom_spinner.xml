@@ -8,5 +8,4 @@
     android:paddingLeft="10dp"
     android:gravity="center_vertical"
     android:textStyle="bold"
-    android:background="@drawable/txt_round"
     android:drawableRight="@drawable/ic_arrow_drop_down"/>

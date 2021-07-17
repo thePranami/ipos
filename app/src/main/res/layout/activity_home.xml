@@ -85,7 +85,7 @@
         android:layout_marginTop="10dp"
         android:padding="10dp">
         <LinearLayout
-            android:id="@+id/dTxtLine"
+            android:id="@+id/fromToLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -104,37 +104,65 @@
                 android:text="To Date:"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/dTxtLine2"
+            android:id="@+id/ftDateLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dTxtLine">
+            android:layout_below="@+id/fromToLine">
             <TextView
+                android:id="@+id/fromDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="07/07/2021"
-                android:padding="10dp"
+                android:padding="8dp"
+                android:fontFamily="@font/rl_medium"
                 android:textSize="16sp"
                 android:drawableRight="@drawable/calendar"
                 android:background="@drawable/rectangle_shape"/>
             <TextView
+                android:id="@+id/toDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:layout_marginLeft="1dp"
                 android:textSize="16sp"
+                android:fontFamily="@font/rl_medium"
                 android:drawableRight="@drawable/calendar"
                 android:background="@drawable/rectangle_shape"
                 android:text="07/07/2021"/>
         </LinearLayout>
-
         <LinearLayout
-            android:id="@+id/lTxtLine"
+            android:id="@+id/oneDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:layout_below="@+id/dTxtLine2">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:layout_below="@+id/ftDateLine">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/rl_medium"
+                android:text="Select Date:"/>
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="07/07/2021"
+                android:padding="8dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/rl_medium"
+                android:drawableRight="@drawable/calendar"
+                android:background="@drawable/rectangle_shape"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ltcLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/oneDate">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -152,10 +180,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lTxtLine2"
+            android:id="@+id/ltcSubLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lTxtLine">
+            android:layout_below="@+id/ltcLine">
             <Spinner
                 android:id="@+id/typeSpinner"
                 android:layout_width="0dp"
@@ -167,7 +195,86 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="1dp"
                 android:background="@drawable/rectangle_shape" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/onlyType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ltcSubLine"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rl_medium"
+                android:textColor="@color/black"
+                android:text="Liquor Type:"/>
+            <Spinner
+                android:id="@+id/onlyTypeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_shape"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/onlyCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/onlyType"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rl_medium"
+                android:textColor="@color/black"
+                android:text="Liquor Category:"/>
+            <Spinner
+                android:id="@+id/onlyCatSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_shape"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/splrLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/onlyCategory"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rl_medium"
+                android:textColor="@color/black"
+                android:text="Supplier Name:"/>
+            <Spinner
+                android:id="@+id/splrSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_shape"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/brandLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/splrLine"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rl_medium"
+                android:textColor="@color/black"
+                android:text="Brand Name:"/>
+            <Spinner
+                android:id="@+id/brandSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
 
     </RelativeLayout>
