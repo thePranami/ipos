@@ -113,7 +113,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="07/07/2021"
                 android:padding="8dp"
                 android:fontFamily="@font/rl_medium"
                 android:textSize="16sp"
@@ -129,8 +128,7 @@
                 android:textSize="16sp"
                 android:fontFamily="@font/rl_medium"
                 android:drawableRight="@drawable/calendar"
-                android:background="@drawable/rectangle_shape"
-                android:text="07/07/2021"/>
+                android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/oneDate"
@@ -144,12 +142,11 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:fontFamily="@font/rl_medium"
-                android:text="Select Date:"/>
+                android:text="Select date:"/>
             <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="07/07/2021"
                 android:padding="8dp"
                 android:textSize="16sp"
                 android:fontFamily="@font/rl_medium"
@@ -276,6 +273,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:background="@drawable/button_shape"
+            android:padding="10dp"
+            android:layout_below="@+id/brandLine"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 </RelativeLayout>

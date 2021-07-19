@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pranami.ipos.R;
+import com.pranami.ipos.Utils.IposConst;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,11 +37,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private int month;
     private int year;
     private Calendar calendar;
-    private DatePickerDialog datePickerDialog;
-    static final int fromDateId = 1;
-    static final int toDateId = 2;
-    static final int dateId = 3;
-    int cur = 0;
+    private DatePickerDialog datePicker, fromDatePicker, toDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +64,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
+        IposConst.sharedPreferences = getSharedPreferences(IposConst.sp_name, MODE_PRIVATE);
+        IposConst.editor = IposConst.sharedPreferences.edit();
         reportSpinner = findViewById(R.id.reportSpinner);
         typeSpinner = findViewById(R.id.typeSpinner);
         catSpinner = findViewById(R.id.catSpinner);
@@ -99,7 +98,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         rList = new ArrayList<>();
         calendar = Calendar.getInstance(TimeZone.getDefault());
 
-        datePickerDialog = new DatePickerDialog(this, this,
+        datePicker = new DatePickerDialog(this, this,
+                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        fromDatePicker = new DatePickerDialog(this, this,
+                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        toDatePicker = new DatePickerDialog(this, this,
                 calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
     }
@@ -151,13 +156,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fromDate:
-                datePickerDialog.show();
+                fromDatePicker.show();
+                IposConst.ftdId = "fdId";
                 break;
             case R.id.toDate:
-                datePickerDialog.show();
+                toDatePicker.show();
+                IposConst.ftdId = "tdId";
                 break;
             case R.id.date:
-                datePickerDialog.show();
+                datePicker.show();
+                IposConst.ftdId = "dId";
                 break;
         }
     }
@@ -167,14 +175,36 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         this.day = day;
         this.month = month;
         this.year = year;
-        if (day < 10 && (month + 1) < 10) {
-            fromDate.setText("0" + day + "/0" + (month + 1) + "/" + year);
-        } else if (day < 10 && (month + 1) > 9) {
-            fromDate.setText("0" + day + "/" + (month + 1) + "/" + year);
-        } else if (day > 9 && (month + 1) < 10) {
-            fromDate.setText(day + "/0" + (month + 1) + "/" + year);
-        } else {
-            fromDate.setText(day + "/" + (month + 1) + "/" + year);
+        if (IposConst.ftdId.equals("fdId")){
+            if (day < 10 && (month + 1) < 10) {
+                fromDate.setText("0" + day + "/0" + (month + 1) + "/" + year);
+            } else if (day < 10 && (month + 1) > 9) {
+                fromDate.setText("0" + day + "/" + (month + 1) + "/" + year);
+            } else if (day > 9 && (month + 1) < 10) {
+                fromDate.setText(day + "/0" + (month + 1) + "/" + year);
+            } else {
+                fromDate.setText(day + "/" + (month + 1) + "/" + year);
+            }
+        }else if (IposConst.ftdId.equals("tdId")){
+            if (day < 10 && (month + 1) < 10) {
+                toDate.setText("0" + day + "/0" + (month + 1) + "/" + year);
+            } else if (day < 10 && (month + 1) > 9) {
+                toDate.setText("0" + day + "/" + (month + 1) + "/" + year);
+            } else if (day > 9 && (month + 1) < 10) {
+                toDate.setText(day + "/0" + (month + 1) + "/" + year);
+            } else {
+                toDate.setText(day + "/" + (month + 1) + "/" + year);
+            }
+        }else if (IposConst.ftdId.equals("dId")){
+            if (day < 10 && (month + 1) < 10) {
+                date.setText("0" + day + "/0" + (month + 1) + "/" + year);
+            } else if (day < 10 && (month + 1) > 9) {
+                date.setText("0" + day + "/" + (month + 1) + "/" + year);
+            } else if (day > 9 && (month + 1) < 10) {
+                date.setText(day + "/0" + (month + 1) + "/" + year);
+            } else {
+                date.setText(day + "/" + (month + 1) + "/" + year);
+            }
         }
     }
 }

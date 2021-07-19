@@ -7,6 +7,7 @@ public class IposConst {
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
     public static String sp_name = "Ipos";
+    public static String ftdId = "ftdId";
 
     public interface Keys {
         String NAME = "NAME";
