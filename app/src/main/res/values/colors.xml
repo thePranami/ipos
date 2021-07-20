@@ -9,4 +9,5 @@
     <color name="black">#000000</color>
     <color name="blackLight">#1F1616</color>
     <color name="transparent">#00000000</color>
+    <color name="paleRed">#ffdddd</color>
 </resources>

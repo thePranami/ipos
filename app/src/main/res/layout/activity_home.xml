@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/paleRed"
     android:layout_height="match_parent"
     tools:context=".Activity.HomeActivity">
 
@@ -68,7 +69,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt2"
-        android:padding="5dp">
+        android:layout_marginTop="20dp"
+        android:padding="10dp">
         <Spinner
             android:id="@+id/reportSpinner"
             android:layout_width="match_parent"
@@ -79,15 +81,27 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/mainRelative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinRel"
         android:layout_marginTop="10dp"
+        android:visibility="visible"
         android:padding="10dp">
+        <TextView
+            android:id="@+id/viewText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:fontFamily="@font/rl_medium"/>
         <LinearLayout
             android:id="@+id/fromToLine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/viewText">
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -134,7 +148,7 @@
             android:id="@+id/oneDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:layout_below="@+id/ftDateLine">
             <TextView
@@ -149,77 +163,36 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/rl_medium"
                 android:drawableRight="@drawable/calendar"
                 android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ltcLine"
+            android:id="@+id/typeLinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/oneDate"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/oneDate">
+            android:orientation="vertical">
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/rl_medium"
                 android:textColor="@color/black"
                 android:text="Liquor Type:"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/rl_medium"
-                android:textColor="@color/black"
-                android:text="Liquor Category:"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ltcSubLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ltcLine">
             <Spinner
                 android:id="@+id/typeSpinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_shape"/>
-            <Spinner
-                android:id="@+id/catSpinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="1dp"
-                android:background="@drawable/rectangle_shape" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/onlyType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ltcSubLine"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/rl_medium"
-                android:textColor="@color/black"
-                android:text="Liquor Type:"/>
-            <Spinner
-                android:id="@+id/onlyTypeSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/onlyCategory"
+            android:id="@+id/categoryLinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/onlyType"
+            android:layout_below="@+id/typeLinear"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
             <TextView
@@ -229,17 +202,17 @@
                 android:textColor="@color/black"
                 android:text="Liquor Category:"/>
             <Spinner
-                android:id="@+id/onlyCatSpinner"
+                android:id="@+id/catSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/splrLine"
+            android:id="@+id/splrLinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/onlyCategory"
+            android:layout_below="@+id/categoryLinear"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
             <TextView
@@ -255,10 +228,10 @@
                 android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/brandLine"
+            android:id="@+id/brandLinear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/splrLine"
+            android:layout_below="@+id/splrLinear"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
             <TextView
@@ -279,8 +252,8 @@
             android:text="Submit"
             android:background="@drawable/button_shape"
             android:padding="10dp"
-            android:layout_below="@+id/brandLine"
-            android:layout_marginTop="30dp"
+            android:layout_below="@+id/brandLinear"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:textColor="@color/white"/>
 
