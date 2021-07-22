@@ -92,7 +92,7 @@
             android:id="@+id/viewText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/black"
             android:gravity="center"
             android:textSize="18sp"
             android:fontFamily="@font/rl_medium"/>
@@ -246,13 +246,33 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_shape"/>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/typeExcLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/brandLinear"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rl_medium"
+                android:textColor="@color/black"
+                android:text="Type:"/>
+            <Spinner
+                android:id="@+id/typeExcSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_shape"/>
+        </LinearLayout>
         <TextView
+            android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Submit"
             android:background="@drawable/button_shape"
             android:padding="10dp"
-            android:layout_below="@+id/brandLinear"
+            android:layout_below="@+id/typeExcLinear"
             android:layout_marginTop="50dp"
             android:gravity="center"
             android:textColor="@color/white"/>

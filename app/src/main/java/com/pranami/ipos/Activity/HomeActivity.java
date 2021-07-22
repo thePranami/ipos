@@ -1,10 +1,12 @@
 package com.pranami.ipos.Activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,19 +25,25 @@ import android.widget.Toast;
 import com.pranami.ipos.R;
 import com.pranami.ipos.Utils.IposConst;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private List<String> rList;
+    private List<String> tExcList;
     private List<String> typeList;
-    private Spinner reportSpinner, typeSpinner, catSpinner, splrSpinner, brandSpinner;
-    private TextView reportName, spinnerText, fromDate, toDate, date, viewText;
+    private Spinner reportSpinner, typeSpinner, catSpinner, splrSpinner, brandSpinner,
+            typeExcSpinner;
+    private TextView reportName, spinnerText, fromDate, toDate, date, viewText, submit;
     private LinearLayout fromToLine, ftDateLine, oneDate, ltcSubLine,
-            typeLinear, categoryLinear, splrLinear, brandLinear;
+            typeLinear, categoryLinear, splrLinear, brandLinear, typeExcLinear;
     private RelativeLayout mainRelative;
 
     private int day;
@@ -44,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Calendar calendar;
     private DatePickerDialog datePicker, fromDatePicker, toDatePicker;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +65,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         rList.add("Sale Vat Report");
         rList.add("TP Report");
         rList.add("Supplier Wise Brand");
+        rList.add("Brand Wise Purchase");
         rList.add("Cost Card Report");
         rList.add("Stock Report");
         rList.add("Stock Detail Report");
@@ -69,12 +79,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         typeList.add("All");
         typeList.add("Indian Liquor");
         typeList.add("Foreign Liquor");
+        // Excise
+        tExcList.add("BEER");
+        tExcList.add("QPN");
 
         setReport();
         setLiquorType();
         setLiquorCategory();
         setSupplierName();
         setBrandName();
+        setExciseType();
 
         reportSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -83,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     case 0:
                         mainRelative.setVisibility(View.GONE);
                         break;
-                    case 1:
+                    case 1: // sale report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.GONE);
@@ -93,8 +107,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.VISIBLE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 2:
+                    case 2:  // sale detail report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.VISIBLE);
@@ -104,8 +119,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.VISIBLE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 3:
+                    case 3:  // sale vat report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.VISIBLE);
@@ -115,8 +131,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.GONE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 4:
+                    case 4:  // tp report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.VISIBLE);
@@ -126,8 +143,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.GONE);
                         splrLinear.setVisibility(View.VISIBLE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 5:
+                    case 5:  // supplier wise brand
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.VISIBLE);
@@ -137,8 +155,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.GONE);
                         splrLinear.setVisibility(View.VISIBLE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 6:
+                    case 6:  // brand wise purchase
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.VISIBLE);
@@ -148,8 +167,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.GONE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.VISIBLE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 7:
+                    case 7: // cost card report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.GONE);
@@ -159,8 +179,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.GONE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.VISIBLE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 8:
+                    case 8:  // stock report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.GONE);
@@ -170,8 +191,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.GONE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 9:
+                    case 9:  // stock detail report
+                        viewText.setText(adapterView.getSelectedItem().toString());
+                        mainRelative.setVisibility(View.VISIBLE);
+                        fromToLine.setVisibility(View.VISIBLE);
+                        ftDateLine.setVisibility(View.VISIBLE);
+                        typeLinear.setVisibility(View.VISIBLE);
+                        oneDate.setVisibility(View.GONE);
+                        categoryLinear.setVisibility(View.GONE);
+                        splrLinear.setVisibility(View.GONE);
+                        brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
+                        break;
+                    case 10:  // issue report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.VISIBLE);
@@ -181,10 +215,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.VISIBLE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 10:
+                    case 11:  // stock register
                         viewText.setText(adapterView.getSelectedItem().toString());
-                        mainRelative.setVisibility(View.VISIBLE);
+                        mainRelative.setVisibility(View.GONE);
                         fromToLine.setVisibility(View.VISIBLE);
                         ftDateLine.setVisibility(View.VISIBLE);
                         oneDate.setVisibility(View.GONE);
@@ -192,8 +227,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.VISIBLE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 11:
+                    case 12:  // excise register
+                        viewText.setText(adapterView.getSelectedItem().toString());
+                        mainRelative.setVisibility(View.VISIBLE);
+                        fromToLine.setVisibility(View.GONE);
+                        ftDateLine.setVisibility(View.GONE);
+                        typeLinear.setVisibility(View.GONE);
+                        oneDate.setVisibility(View.VISIBLE);
+                        categoryLinear.setVisibility(View.GONE);
+                        splrLinear.setVisibility(View.GONE);
+                        brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.VISIBLE);
+                        break;
+                    case 13:  // breakage report
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.GONE);
@@ -203,8 +251,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.VISIBLE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
-                    case 12:
+                    case 14:  // breakage  detail
+                        viewText.setText(adapterView.getSelectedItem().toString());
+                        mainRelative.setVisibility(View.VISIBLE);
+                        fromToLine.setVisibility(View.VISIBLE);
+                        ftDateLine.setVisibility(View.VISIBLE);
+                        typeLinear.setVisibility(View.VISIBLE);
+                        oneDate.setVisibility(View.GONE);
+                        categoryLinear.setVisibility(View.VISIBLE);
+                        splrLinear.setVisibility(View.GONE);
+                        brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
+                        break;
+                    case 15:  //apply po
                         viewText.setText(adapterView.getSelectedItem().toString());
                         mainRelative.setVisibility(View.VISIBLE);
                         fromToLine.setVisibility(View.GONE);
@@ -214,28 +275,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         categoryLinear.setVisibility(View.VISIBLE);
                         splrLinear.setVisibility(View.GONE);
                         brandLinear.setVisibility(View.GONE);
-                        break;
-                    case 13:
-                        viewText.setText(adapterView.getSelectedItem().toString());
-                        mainRelative.setVisibility(View.VISIBLE);
-                        fromToLine.setVisibility(View.GONE);
-                        ftDateLine.setVisibility(View.GONE);
-                        typeLinear.setVisibility(View.VISIBLE);
-                        oneDate.setVisibility(View.VISIBLE);
-                        categoryLinear.setVisibility(View.VISIBLE);
-                        splrLinear.setVisibility(View.GONE);
-                        brandLinear.setVisibility(View.GONE);
-                        break;
-                    case 14:
-                        viewText.setText(adapterView.getSelectedItem().toString());
-                        mainRelative.setVisibility(View.VISIBLE);
-                        fromToLine.setVisibility(View.GONE);
-                        ftDateLine.setVisibility(View.GONE);
-                        typeLinear.setVisibility(View.VISIBLE);
-                        oneDate.setVisibility(View.VISIBLE);
-                        categoryLinear.setVisibility(View.VISIBLE);
-                        splrLinear.setVisibility(View.GONE);
-                        brandLinear.setVisibility(View.GONE);
+                        typeExcLinear.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -247,15 +287,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void init() {
         IposConst.sharedPreferences = getSharedPreferences(IposConst.sp_name, MODE_PRIVATE);
         IposConst.editor = IposConst.sharedPreferences.edit();
+
         reportSpinner = findViewById(R.id.reportSpinner);
         typeSpinner = findViewById(R.id.typeSpinner);
         catSpinner = findViewById(R.id.catSpinner);
         reportName = findViewById(R.id.reportName);
+        typeExcSpinner = findViewById(R.id.typeExcSpinner);
+
         spinnerText = findViewById(R.id.spinnerText);
         viewText = findViewById(R.id.viewText);
+        submit = findViewById(R.id.submit);
+        submit.setOnClickListener(this);
 
         splrSpinner = findViewById(R.id.splrSpinner);
         brandSpinner = findViewById(R.id.brandSpinner);
@@ -268,6 +314,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         categoryLinear = findViewById(R.id.categoryLinear);
         splrLinear = findViewById(R.id.splrLinear);
         brandLinear = findViewById(R.id.brandLinear);
+        typeExcLinear = findViewById(R.id.typeExcLinear);
 
         mainRelative = findViewById(R.id.mainRelative);
 
@@ -280,6 +327,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         rList = new ArrayList<>();
         typeList = new ArrayList<>();
+        tExcList = new ArrayList<>();
         calendar = Calendar.getInstance(TimeZone.getDefault());
 
         datePicker = new DatePickerDialog(this, this,
@@ -291,6 +339,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toDatePicker = new DatePickerDialog(this, this,
                 calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
+        String currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+        date.setText(currentDate);
+        toDate.setText(currentDate);
+        LocalDate localDate = LocalDate.now();
+        String fd = ""+localDate.withDayOfMonth(1); // 2021-07-01
+        String y = fd.substring(0, 4);
+        String m = fd.substring(5,7);
+        String d = fd.substring(8,10);
+        Log.d("yyyyyyyyyy", y+m+d);
+        fromDate.setText(d+"/"+m+"/"+y);
     }
 
     public void setReport() {
@@ -324,6 +382,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         brandSpinner.setAdapter(adapter);
     }
 
+    public void setExciseType() {
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.custom_spinner, tExcList);
+        adapter.setDropDownViewResource(R.layout.drop_down_list);
+        typeExcSpinner.setAdapter(adapter);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -339,6 +403,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 datePicker.show();
                 IposConst.ftdId = "dId";
                 break;
+            case R.id.submit:
+                if (fromDate.getText().toString().isEmpty()){
+                    Toast.makeText(this, "fill date", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+                }
         }
     }
 
