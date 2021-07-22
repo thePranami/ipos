@@ -10,12 +10,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -39,6 +42,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private List<String> rList;
     private List<String> tExcList;
     private List<String> typeList;
+    private ImageView dotMenu;
+    private PopupMenu popupMenu;
     private Spinner reportSpinner, typeSpinner, catSpinner, splrSpinner, brandSpinner,
             typeExcSpinner;
     private TextView reportName, spinnerText, fromDate, toDate, date, viewText, submit;
@@ -59,22 +64,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         init();
         //ReportList
-        rList.add("Select report");
+        rList.add("Select report"); // 0 position
         rList.add("Sale Report");
         rList.add("Sale Detail Report");
         rList.add("Sale Vat Report");
         rList.add("TP Report");
-        rList.add("Supplier Wise Brand");
+        rList.add("Supplier Wise Brand");  // 5th position
         rList.add("Brand Wise Purchase");
         rList.add("Cost Card Report");
         rList.add("Stock Report");
         rList.add("Stock Detail Report");
-        rList.add("Issue Report");
+        rList.add("Issue Report");         // 10th position
         rList.add("Stock Register");
         rList.add("Excise Register");
         rList.add("Breakage Report");
         rList.add("Breakage Detail Report");
-        rList.add("Apply PO");
+        rList.add("Apply PO");               // 15th position
         // LiquorType
         typeList.add("All");
         typeList.add("Indian Liquor");
@@ -82,6 +87,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // Excise
         tExcList.add("BEER");
         tExcList.add("QPN");
+        dotMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupMenu = new PopupMenu(HomeActivity.this, dotMenu);
+                popupMenu.getMenuInflater().inflate(R.menu.pop_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        Log.d("gghfgg...", String.valueOf(menuItem.getOrder()));
+                        Toast.makeText(HomeActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
         setReport();
         setLiquorType();
@@ -305,6 +326,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         splrSpinner = findViewById(R.id.splrSpinner);
         brandSpinner = findViewById(R.id.brandSpinner);
+        dotMenu = findViewById(R.id.dotMenu);
 
         fromToLine = findViewById(R.id.fromToLine);
         ftDateLine = findViewById(R.id.ftDateLine);
@@ -317,7 +339,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         typeExcLinear = findViewById(R.id.typeExcLinear);
 
         mainRelative = findViewById(R.id.mainRelative);
-
         fromDate = findViewById(R.id.fromDate);
         fromDate.setOnClickListener(this);
         toDate = findViewById(R.id.toDate);

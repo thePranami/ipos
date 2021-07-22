@@ -31,11 +31,12 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="0.8" />
         <ImageView
+            android:id="@+id/dotMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
             android:layout_gravity="center"
-            android:src="@drawable/ic_ipos_logout"/>
+            android:src="@drawable/ic_dot"/>
 
     </LinearLayout>
 
