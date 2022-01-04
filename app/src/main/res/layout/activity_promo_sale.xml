@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PromoSaleActivity">
+
+    <LinearLayout
+        android:id="@+id/dailyAction"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/colorPrimary">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_gravity="center"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Company Sale Report"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.9" />
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/dailyAction">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/srNo"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:text="SNo."
+                    android:textSize="12sp"/>
+                <TextView
+                    android:id="@+id/shopName"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Shop Name"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Previous\nDay Sale"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/brandName"
+                    android:padding="5dp"
+                    android:text="Total Sale"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/promoRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+    <LinearLayout
+        android:id="@+id/noDataView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/dailyAction"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@drawable/no_data">
+    </LinearLayout>
+
+</RelativeLayout>

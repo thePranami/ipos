@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paleRed"
+    tools:context=".Activity.LoginActivity">
+
+    <LinearLayout
+        android:id="@+id/loginAction"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/colorPrimary">
+        <ImageView
+            android:id="@+id/backFromLogin"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_gravity="center"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Login to iPOS"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.9" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginAction">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/animImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ipos"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:fontFamily="@font/rl_medium"
+                android:layout_marginTop="10dp"
+                android:text="Enter User Name*"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="18sp"
+                    android:maxLines="1"
+                    android:drawableStart="@drawable/ic_user"
+                    android:background="@drawable/box_fill" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:text="Enter Password*"
+                android:fontFamily="@font/rl_medium"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleTint="@color/colorPrimary"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:letterSpacing="0.15"
+                    android:inputType="textPassword"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:background="@drawable/box_fill"
+                    android:textSize="18sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:text="Login As*"
+                android:fontFamily="@font/rl_medium"/>
+            <Spinner
+                android:id="@+id/loginAsSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/box_fill">
+            </Spinner>
+            <TextView
+                android:id="@+id/loginType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:fontFamily="@font/rl_medium"
+                android:layout_marginTop="20dp"
+                android:text="Enter Vend Id*"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/vendId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:letterSpacing="0.10"
+                    android:textSize="18sp"
+                    android:inputType="textCapCharacters"
+                    android:drawableStart="@drawable/ic_shop"
+                    android:background="@drawable/box_fill"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/rl_medium"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_shape"/>
+            <TextView
+                android:id="@+id/forgetPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forget_password"
+                android:layout_gravity="end"
+                android:textSize="16sp"
+                android:fontFamily="@font/rl_medium"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/groupAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Promoters Login"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/rl_medium"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_shape"/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Developed &amp; Maintained By:"
+            android:gravity="center"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LoopinTechies Services(India) Pvt. Ltd."
+            android:gravity="center_horizontal"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Copyright @ 2021, All rights reserved"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+</RelativeLayout>

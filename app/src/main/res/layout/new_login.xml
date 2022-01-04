@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paleRed"
+    tools:context=".Activity.LoginActivity">
+
+    <LinearLayout
+        android:id="@+id/loginAction"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/colorPrimary">
+        <ImageView
+            android:id="@+id/backFromLogin"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_gravity="center"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Login to iPOS"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.9" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginAction"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/animImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ipos"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingBottom="5dp"
+                android:fontFamily="@font/rl_medium"
+                android:layout_marginTop="50dp"
+                android:text="Enter User Name*"/>
+
+            <EditText
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:maxLines="1"
+                android:background="@drawable/txt_round" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:text="Password*"
+                android:fontFamily="@font/rl_medium"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:letterSpacing="0.15"
+                android:inputType="textPassword"
+                android:layout_toLeftOf="@+id/visibleOn"
+                android:background="@drawable/txt_round"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingBottom="5dp"
+                android:fontFamily="@font/rl_medium"
+                android:layout_marginTop="20dp"
+                android:text="Enter Vend Id*"/>
+
+            <EditText
+                android:id="@+id/vendId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:letterSpacing="0.10"
+                android:textSize="18sp"
+                android:inputType="textCapCharacters"
+                android:background="@drawable/txt_round"/>
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/rl_medium"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_shape"/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Developed &amp; Maintained By:"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LoopinTechies Services(India) Pvt. Ltd."
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Copyright @ 2021, All rights reserved"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+</RelativeLayout>
